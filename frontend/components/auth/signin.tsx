@@ -13,56 +13,53 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FaGithub } from "react-icons/fa";
 import { SignInWithGithub } from "./signin-button";
-// import { useState } from "react";
-import { fetchAPI } from "@/app/[lang]/utils/fetch-api";
 
-// interface SignInProps {
-//   id: string;
-//   attributes: {
-//     title: string;
-//     body: string;
-//     locale: string;
-//     date: string;
-//   };
-// }
+interface SignInProps {
+  loginText: string;
+  loginDescription: string;
+  email: string;
+  emailPlaceholder: string;
+  loginButton: string;
+  loginWithButton: string;
+  signUpLink: string;
+  dontHaveAccount: string;
+  password: string;
+}
 
-export default function SignIn() {
-  // const [props, setProps] = useState<SignInProps | null>();
-  const options = {
-    headers: {
-      Authorization: `Bearer ${process.env.NEXT_PUBLIC_STRAPI_API_TOKEN}`,
-    },
-  };
-  const fecthData = async () => {
-    const responseData = await fetchAPI("/signins?locale=fr", options);
-    console.log(responseData)
-  };
-
-  fecthData();
-
+export default function SignIn({
+  loginText,
+  loginDescription,
+  email,
+  emailPlaceholder,
+  loginButton,
+  loginWithButton,
+  signUpLink,
+  dontHaveAccount,
+  password,
+}: SignInProps) {
   return (
     <div className="flex h-screen w-full flex-col items-center justify-center px-4">
       <Card className="mx-auto max-w-sm">
         <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account
+          <CardTitle className="text-2xl">{loginText}</CardTitle>
+          <CardDescription className="text-justify text-xs">
+            {loginDescription}
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-4">
             <div className="grid gap-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{email}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="m@example.com"
+                placeholder={emailPlaceholder}
                 required
               />
             </div>
             <div className="grid gap-2">
               <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">{password}</Label>
                 <Link
                   href="#"
                   className="ml-auto inline-block text-sm underline"
@@ -73,7 +70,7 @@ export default function SignIn() {
               <Input id="password" type="password" required />
             </div>
             <Button type="submit" className="w-full">
-              Login
+              {loginButton}
             </Button>
             <form
               action={() => {
@@ -82,14 +79,14 @@ export default function SignIn() {
             >
               <Button variant="outline" className="w-full">
                 <FaGithub className="mr-2 size-6" />
-                Login with GitHub
+                {loginWithButton} GitHub
               </Button>
             </form>
           </div>
           <div className="mt-4 text-center text-sm">
-            Don&apos;t have an account?{" "}
+            {dontHaveAccount}{" "}
             <Link href="#" className="underline">
-              Sign up
+              {signUpLink}
             </Link>
           </div>
         </CardContent>

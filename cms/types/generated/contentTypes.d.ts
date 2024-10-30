@@ -428,6 +428,7 @@ export interface ApiBlogBlog extends Struct.CollectionTypeSchema {
 export interface ApiSigninSignin extends Struct.CollectionTypeSchema {
   collectionName: 'signins';
   info: {
+    description: '';
     displayName: 'SignIn';
     pluralName: 'signins';
     singularName: 'signin';
@@ -492,6 +493,12 @@ export interface ApiSigninSignin extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     > &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    password: Schema.Attribute.String &
       Schema.Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

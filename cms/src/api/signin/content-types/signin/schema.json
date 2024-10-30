@@ -4,7 +4,8 @@
   "info": {
     "singularName": "signin",
     "pluralName": "signins",
-    "displayName": "SignIn"
+    "displayName": "SignIn",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -32,14 +33,15 @@
       "type": "text"
     },
     "logo": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
       ],
-      "type": "media",
-      "multiple": true,
       "pluginOptions": {
         "i18n": {
           "localized": true
@@ -87,6 +89,14 @@
       "type": "string"
     },
     "dontHaveAccount": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "password": {
       "pluginOptions": {
         "i18n": {
           "localized": true
