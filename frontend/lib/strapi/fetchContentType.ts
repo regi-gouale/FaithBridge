@@ -36,7 +36,6 @@ export function spreadStrapiData(
 export default async function fetchContentType(
   contentType: string,
   params: string,
-  spreadData?: boolean
 ): Promise<StrapiData | StrapiData[] | null | undefined> {
   try {
     // Construct the full URL for the API request
@@ -59,7 +58,6 @@ export default async function fetchContentType(
       );
     }
     const jsonData: StrapiResponse = await response.json();
-    console.log(spreadData);
     // return spreadData ? spreadStrapiData(jsonData) : jsonData;
     return spreadStrapiData(jsonData);
   } catch (error) {

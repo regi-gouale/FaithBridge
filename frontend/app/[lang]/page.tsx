@@ -10,7 +10,7 @@ export default async function Home(props: { params: HomeProps }) {
   const session = await auth();
   const { lang } = await props.params;
 
-  const signInData = await fetchContentType("signins", `locale=${lang}`, true);
+  const signInData = await fetchContentType("signins", `locale=${lang}`);
 
   if (!signInData) {
     return <div>Failed to fetch data</div>;
