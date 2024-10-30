@@ -1,0 +1,2 @@
+auth-frontend/.env
+auth-frontend/prisma/dev.db
