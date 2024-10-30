@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins, Lato } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import { Locale, i18n } from '@/i18n-config'
 
 const headingFont = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -21,13 +22,19 @@ export const metadata: Metadata = {
     "This is an example of an authentication application using Next.js",
 };
 
+export async function generateStaticParams() {
+  return i18n.locales.map(locale => ({ lang: locale }))
+}
+
 export default function RootLayout({
   children,
+  params
 }: Readonly<{
   children: React.ReactNode;
+  params: { lang: Locale }
 }>) {
   return (
-    <html lang="en">
+    <html lang={params.lang}>
       <body
         className={cn(
           `${headingFont.variable} ${bodyFont.variable} antialiased`,
