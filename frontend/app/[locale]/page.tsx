@@ -1,8 +1,14 @@
 import { auth } from "@/auth";
-import SignIn from "@/components/auth/signin";
+import { redirect } from "next/navigation";
 
-export default async function Home() {
+type HomeProps = Promise<{
+  locale: string;
+}>;
+
+export default async function Home(props: { params: HomeProps }) {
   const session = await auth();
+  const { locale: lang } = await props.params;
+
   if (session?.user) {
     return (
       <div className="flex w-full flex-col items-center justify-center">
@@ -10,10 +16,5 @@ export default async function Home() {
       </div>
     );
   }
-
-  return (
-    <div className="flex w-full flex-col items-center justify-center">
-      <SignIn />
-    </div>
-  );
+  redirect(`/${lang}/sign-in`);
 }

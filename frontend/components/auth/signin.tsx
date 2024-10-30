@@ -4,92 +4,91 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FaGithub } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 import { SignInWithGithub } from "./signin-button";
+import Image from "next/image";
+import { StrapiData } from "@/lib/strapi/fetchContentType";
 
-interface SignInProps {
-  loginText: string;
-  loginDescription: string;
-  email: string;
-  emailPlaceholder: string;
-  loginButton: string;
-  loginWithButton: string;
-  signUpLink: string;
-  dontHaveAccount: string;
-  password: string;
+export interface SignInDataProps {
+  data: StrapiData;
 }
 
-export default function SignIn({
-  loginText,
-  loginDescription,
-  email,
-  emailPlaceholder,
-  loginButton,
-  loginWithButton,
-  signUpLink,
-  dontHaveAccount,
-  password,
-}: SignInProps) {
+export default function SignIn({ data }: SignInDataProps) {
   return (
-    <div className="flex h-screen w-full flex-col items-center justify-center px-4">
-      <Card className="mx-auto max-w-sm">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center px-4">
+      <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-2xl">{loginText}</CardTitle>
-          <CardDescription className="text-justify text-xs">
-            {loginDescription}
+          <div className="mb-4 flex justify-center">
+            <Image
+              src="http://localhost:1337/uploads/logo_dbbf5809ff.svg"
+              alt="Company Logo"
+              width={240}
+              height={50}
+              priority
+            />
+          </div>
+          <CardTitle className="text-center font-heading text-2xl">
+            {data.cardTitle}
+          </CardTitle>
+          <CardDescription className="text-center font-body text-base">
+            {data.cardDescription}
           </CardDescription>
         </CardHeader>
-        <CardContent>
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <Label htmlFor="email">{email}</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder={emailPlaceholder}
-                required
-              />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">{password}</Label>
-                <Link
-                  href="#"
-                  className="ml-auto inline-block text-sm underline"
-                >
-                  Forgot your password?
-                </Link>
-              </div>
-              <Input id="password" type="password" required />
-            </div>
+        <CardContent className="space-y-4">
+          <form action={() => {}} className="space-y-4">
+            <Input
+              type="email"
+              name="email"
+              placeholder={data.emailPlaceholder as string}
+              required
+            />
             <Button type="submit" className="w-full">
-              {loginButton}
+              {data.magicLinkText}
             </Button>
-            <form
-              action={() => {
+          </form>
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-background px-2 text-muted-foreground">
+                {data.orContinueText}
+              </span>
+            </div>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => {
                 SignInWithGithub();
               }}
             >
-              <Button variant="outline" className="w-full">
-                <FaGithub className="mr-2 size-6" />
-                {loginWithButton} GitHub
-              </Button>
-            </form>
-          </div>
-          <div className="mt-4 text-center text-sm">
-            {dontHaveAccount}{" "}
-            <Link href="#" className="underline">
-              {signUpLink}
-            </Link>
+              <FaGithub className="mr-2 size-6" />
+              GitHub
+            </Button>
+            <Button variant="outline" className="w-full">
+              <FcGoogle className="mr-2 size-6" />
+              Google
+            </Button>
           </div>
         </CardContent>
+        <CardFooter className="flex justify-center">
+          <p className="text-sm text-muted-foreground">
+            {data.dontHaveAccountText}{" "}
+            <Link href="/signup" className="text-primary hover:underline">
+              {data.signUpText}
+            </Link>
+          </p>
+        </CardFooter>
       </Card>
     </div>
   );
