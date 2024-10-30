@@ -31,7 +31,7 @@ export default function SignIn({ data }: SignInDataProps) {
               src="http://localhost:1337/uploads/logo_dbbf5809ff.svg"
               alt="Company Logo"
               width={240}
-              height={50}
+              height={240}
               priority
             />
           </div>
@@ -48,9 +48,14 @@ export default function SignIn({ data }: SignInDataProps) {
               type="email"
               name="email"
               placeholder={data.emailPlaceholder as string}
+              className="h-10"
               required
             />
-            <Button type="submit" className="w-full">
+            <Button
+              type="submit"
+              className="w-full font-heading font-semibold"
+              size="lg"
+            >
               {data.magicLinkText}
             </Button>
           </form>
@@ -67,7 +72,8 @@ export default function SignIn({ data }: SignInDataProps) {
           <div className="grid grid-cols-2 gap-4">
             <Button
               variant="outline"
-              className="w-full"
+              className="w-full font-heading font-medium"
+              size={"lg"}
               onClick={() => {
                 SignInWithGithub();
               }}
@@ -75,7 +81,11 @@ export default function SignIn({ data }: SignInDataProps) {
               <FaGithub className="mr-2 size-6" />
               GitHub
             </Button>
-            <Button variant="outline" className="w-full">
+            <Button
+              variant="outline"
+              className="w-full font-heading font-medium"
+              size={"lg"}
+            >
               <FcGoogle className="mr-2 size-6" />
               Google
             </Button>
@@ -84,7 +94,7 @@ export default function SignIn({ data }: SignInDataProps) {
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">
             {data.dontHaveAccountText}{" "}
-            <Link href="/signup" className="text-primary hover:underline">
+            <Link href="/sign-up" className="text-primary hover:underline">
               {data.signUpText}
             </Link>
           </p>
