@@ -13,7 +13,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { SignInWithGithub } from "./signin-button";
+import { SignInWithGithub } from "./signin-buttons";
 import Image from "next/image";
 import { StrapiData } from "@/lib/strapi/fetchContentType";
 
