@@ -13,7 +13,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { SignInWithGithub } from "./signin-buttons";
+import { SignInWithGithub, SignInWithGoogle, SignInWithMagicLink } from "./signin-buttons";
 import Image from "next/image";
 import { StrapiData } from "@/lib/strapi/fetchContentType";
 
@@ -43,7 +43,12 @@ export default function SignIn({ data }: SignInDataProps) {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
-          <form action={() => {}} className="space-y-4">
+          <form
+            action={(formData) => {
+              SignInWithMagicLink(formData);
+            }}
+            className="space-y-4"
+          >
             <Input
               type="email"
               name="email"
@@ -85,6 +90,9 @@ export default function SignIn({ data }: SignInDataProps) {
               variant="outline"
               className="w-full font-heading font-medium"
               size={"lg"}
+              onClick={() => {
+                SignInWithGoogle();
+              }}
             >
               <FcGoogle className="mr-2 size-6" />
               Google

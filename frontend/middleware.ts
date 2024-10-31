@@ -22,8 +22,16 @@ export async function middleware(request: NextRequest) {
     (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
   );
 
+  // Vérification de l'authentification
+  const locale = getLocale(request) || i18n.defaultLocale;
+  const session = await auth();
+  if (!session?.user && !pathname.startsWith(`/${locale}/sign-in`)) {
+    return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
+  } else if (session?.user && pathname.startsWith(`/${locale}/sign-in`)) {
+    return NextResponse.redirect(new URL(`/${locale}`, request.url));
+  }
+
   if (pathnameIsMissingLocale) {
-    const locale = getLocale(request);
     return NextResponse.redirect(
       new URL(
         `/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`,
@@ -32,12 +40,8 @@ export async function middleware(request: NextRequest) {
     );
   }
 
-  // Vérification de l'authentification
-  const session = await auth();
-  if (!session?.user && !pathname.startsWith("/sign-in")) {
-    const locale = getLocale(request) || i18n.defaultLocale;
-    return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
-  }
+  // Ajoutez cette ligne pour éviter de continuer l'exécution après la redirection
+  return NextResponse.next();
 }
 
 export const config = {
