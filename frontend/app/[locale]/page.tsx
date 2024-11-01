@@ -5,7 +5,7 @@ import { ClipboardList, BarChart, Users, Clock } from "lucide-react";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div className="mx-auto flex min-h-screen flex-col">
       <header className="flex h-14 items-center px-4 lg:px-6">
         <Link className="flex items-center justify-center" href="#">
           <ClipboardList className="mr-2 size-6" />
