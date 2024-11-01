@@ -2,63 +2,22 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { ClipboardList, BarChart, Users, Clock } from "lucide-react";
+import { Header } from "@/components/header";
+import { HeroSection } from "@/components/hero-section";
 
-export default function HomePage() {
+type HomePageProps = Promise<{
+  locale: string;
+}>;
+
+export default async function HomePage(props: { params: HomePageProps }) {
+  const { locale } = await props.params;
+
   return (
     <div className="mx-auto flex min-h-screen flex-col">
-      <header className="flex h-14 items-center px-4 lg:px-6">
-        <Link className="flex items-center justify-center" href="#">
-          <ClipboardList className="mr-2 size-6" />
-          <span className="font-bold">InterviewReporter</span>
-        </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link
-            className="text-sm font-medium underline-offset-4 hover:underline"
-            href="#"
-          >
-            Features
-          </Link>
-          <Link
-            className="text-sm font-medium underline-offset-4 hover:underline"
-            href="#"
-          >
-            Pricing
-          </Link>
-          <Link
-            className="text-sm font-medium underline-offset-4 hover:underline"
-            href="#"
-          >
-            About
-          </Link>
-          <Link
-            className="text-sm font-medium underline-offset-4 hover:underline"
-            href="#"
-          >
-            Contact
-          </Link>
-        </nav>
-      </header>
+      <Header locale={locale} />
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Streamline Your Interview Reporting
-                </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-400 md:text-xl">
-                  Effortlessly create, manage, and analyze applicant interview
-                  reports with our intuitive SaaS platform.
-                </p>
-              </div>
-              <div className="space-x-4">
-                <Button>Get Started</Button>
-                <Button variant="outline">Learn More</Button>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="w-full bg-gray-100 py-12 dark:bg-gray-800 md:py-24 lg:py-32">
+        <HeroSection locale={locale} />
+        <section className="w-full rounded-md bg-gray-100 py-12 dark:bg-gray-800 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
             <h2 className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
               Key Features
