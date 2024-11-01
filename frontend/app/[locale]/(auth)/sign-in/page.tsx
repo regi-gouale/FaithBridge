@@ -35,7 +35,6 @@ export default async function SignInPage(props: { params: SignInPageProps }) {
       <header className="my-4 w-full p-4">
         <AuthHeader
           locales={locales}
-          signButtonText={signInPageContent.signUpText as string}
         />
       </header>
       <main className="flex grow items-center justify-center px-4">

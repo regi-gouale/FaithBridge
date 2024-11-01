@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Locale, i18n } from "@/i18n-config";
 import { ReactNode, Suspense } from "react";
 import { ThemeProvider } from "@/components/theme/theme-provider";
+import { TailwindIndicator } from "@/components/theme/tailwind-indicator";
 
 const headingFont = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -36,7 +37,7 @@ export default function RootLayout({
   params: { locale: Locale };
 }>) {
   return (
-    <html lang={params.locale}>
+    <html lang={params.locale} suppressHydrationWarning>
       <body
         className={cn(
           `${headingFont.variable} ${bodyFont.variable} antialiased`,
@@ -44,7 +45,15 @@ export default function RootLayout({
         )}
       >
         <Suspense fallback={<SuspenseFallback />}>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <TailwindIndicator />
+          </ThemeProvider>
         </Suspense>
       </body>
     </html>

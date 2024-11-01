@@ -14,11 +14,10 @@ import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 
 interface AuthHeaderProps {
-  signButtonText: string;
   locales: string[];
 }
 
-export const AuthHeader = ({ signButtonText, locales }: AuthHeaderProps) => {
+export const AuthHeader = ({ locales }: AuthHeaderProps) => {
   const router = useRouter();
   const { setTheme } = useTheme();
   const pathname = usePathname();
@@ -59,7 +58,7 @@ export const AuthHeader = ({ signButtonText, locales }: AuthHeaderProps) => {
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
-            variant="ghost"
+            variant="outline"
             size="icon"
             className="hover:bg-primary/20 hover:shadow-xl"
           >
@@ -80,13 +79,6 @@ export const AuthHeader = ({ signButtonText, locales }: AuthHeaderProps) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button
-        variant="secondary"
-        className="font-heading font-semibold hover:bg-primary/20 hover:shadow-xl"
-        onClick={() => router.push("/sign-up")}
-      >
-        {signButtonText}
-      </Button>
     </div>
   );
 };
