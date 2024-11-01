@@ -1,18 +1,13 @@
 import { ReactNode, Suspense } from "react";
 
-interface LayoutProps {
+interface AuthLayoutProps {
   children: ReactNode;
 }
-
-export default async function Layout({ children }: LayoutProps) {
-  return (
-    <Suspense fallback={<SuspenseFallback />}>
-      <main className="flex size-full flex-col bg-background">{children}</main>
-    </Suspense>
-  );
+export default function AuthLayout({ children }: AuthLayoutProps) {
+  return <Suspense fallback={<SuspenseFallback />}>{children}</Suspense>;
 }
 
-function SuspenseFallback() {
+export function SuspenseFallback() {
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center space-y-4">

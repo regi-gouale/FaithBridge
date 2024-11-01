@@ -3,6 +3,8 @@ import { Poppins, Lato } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Locale, i18n } from "@/i18n-config";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ReactNode } from "react";
 
 const headingFont = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -30,9 +32,10 @@ export default function RootLayout({
   children,
   params,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
   params: { locale: Locale };
 }>) {
+
   return (
     <html lang={params.locale}>
       <body
@@ -41,7 +44,14 @@ export default function RootLayout({
           "h-full"
         )}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
