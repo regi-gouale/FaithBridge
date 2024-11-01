@@ -37,7 +37,7 @@ export default function RootLayout({
   params: { locale: Locale };
 }>) {
   return (
-    <html lang={params.locale}>
+    <html lang={params.locale} suppressHydrationWarning>
       <body
         className={cn(
           `${headingFont.variable} ${bodyFont.variable} antialiased`,
