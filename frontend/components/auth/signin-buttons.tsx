@@ -17,3 +17,4 @@ export async function SignInWithGoogle() {
 export async function SignOutButton() {
   return await signOut({ redirectTo: "/sign-in" });
 }
+
