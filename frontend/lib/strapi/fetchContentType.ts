@@ -21,7 +21,7 @@ export function spreadStrapiData(
 
 export default async function fetchContentType(
   contentType: string,
-  params: string
+  params?: string
 ): Promise<StrapiData | StrapiData[] | null | undefined> {
   try {
     const url = new URL(
@@ -29,7 +29,7 @@ export default async function fetchContentType(
       process.env.NEXT_PUBLIC_STRAPI_API_URL
     );
 
-    const response = await fetch(`${url.href}?${params}`, {
+    const response = await fetch(`${url.href}${params ? `?${params}` : ""}`, {
       method: "GET",
       cache: "no-store",
     });
@@ -47,4 +47,19 @@ export default async function fetchContentType(
   } catch (error) {
     console.error("FetchContentTypeError", error);
   }
+}
+
+export async function fetchLocales(): Promise<string[]> {
+  const url = new URL("api/i18n/locales", process.env.NEXT_PUBLIC_STRAPI_API_URL);
+
+  const response = await fetch(url.href, {
+    method: "GET",
+    cache: "no-store",
+  });
+
+  if (response.ok) {
+    const locales = await response.json();
+    return locales.map((locale: StrapiData) => locale.name as string);
+  }
+  return [];
 }
