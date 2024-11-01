@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_components_features",
+  "info": {
+    "displayName": "Feature",
+    "icon": "feather"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    }
+  }
+}

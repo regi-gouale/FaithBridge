@@ -19,7 +19,7 @@ export default async function HomePage(props: { params: HomePageProps }) {
         <HeroSection locale={locale} />
         <section className="w-full rounded-md bg-gray-100 py-12 dark:bg-gray-800 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <h2 className="mb-12 text-center text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
+            <h2 className="mb-12 text-center font-heading text-3xl font-semibold tracking-tighter sm:text-4xl md:text-5xl">
               Key Features
             </h2>
             <div className="grid gap-10 sm:grid-cols-2 md:grid-cols-3">
