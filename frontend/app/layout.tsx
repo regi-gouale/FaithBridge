@@ -3,8 +3,8 @@ import { Poppins, Lato } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Locale, i18n } from "@/i18n-config";
+import { ReactNode, Suspense } from "react";
 import { ThemeProvider } from "@/components/theme/theme-provider";
-import { ReactNode } from "react";
 
 const headingFont = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -35,7 +35,6 @@ export default function RootLayout({
   children: ReactNode;
   params: { locale: Locale };
 }>) {
-
   return (
     <html lang={params.locale}>
       <body
@@ -44,15 +43,20 @@ export default function RootLayout({
           "h-full"
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <Suspense fallback={<SuspenseFallback />}>
+          <ThemeProvider>{children}</ThemeProvider>
+        </Suspense>
       </body>
     </html>
+  );
+}
+
+export function SuspenseFallback() {
+  return (
+    <div className="flex h-screen w-full items-center justify-center">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="size-32 animate-spin rounded-full border-4 border-gray-300 border-t-gray-900" />
+      </div>
+    </div>
   );
 }

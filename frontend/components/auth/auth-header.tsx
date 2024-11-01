@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { Earth, MoonIcon, SunIcon } from "lucide-react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 
@@ -23,10 +22,6 @@ export const AuthHeader = ({ signButtonText, locales }: AuthHeaderProps) => {
   const router = useRouter();
   const { setTheme } = useTheme();
   const pathname = usePathname();
-  const splitPathname = pathname.split("/");
-
-  const newPathname = splitPathname.slice(2).join("/");
-  console.log(newPathname);
 
   const localeToCode = (locale: string) => {
     const match = locale.match(/\(([^)]+)\)/);
@@ -37,7 +32,11 @@ export const AuthHeader = ({ signButtonText, locales }: AuthHeaderProps) => {
     <div className="container mx-auto flex items-center justify-end space-x-4">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hover:bg-primary/20 hover:shadow-xl"
+          >
             <Earth className="size-2" />
             <span className="sr-only">Toggle language</span>
           </Button>
@@ -59,7 +58,11 @@ export const AuthHeader = ({ signButtonText, locales }: AuthHeaderProps) => {
       </DropdownMenu>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost" size="icon">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="hover:bg-primary/20 hover:shadow-xl"
+          >
             <SunIcon className="size-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
             <MoonIcon className="absolute size-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             <span className="sr-only">Toggle theme</span>
@@ -77,8 +80,12 @@ export const AuthHeader = ({ signButtonText, locales }: AuthHeaderProps) => {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button asChild variant="secondary">
-        <Link href="/sign-up">{signButtonText}</Link>
+      <Button
+        variant="secondary"
+        className="font-heading font-semibold hover:bg-primary/20 hover:shadow-xl"
+        onClick={() => router.push("/sign-up")}
+      >
+        {signButtonText}
       </Button>
     </div>
   );
