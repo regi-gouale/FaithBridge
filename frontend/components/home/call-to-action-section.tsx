@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import fetchContentType, { StrapiData } from "@/lib/strapi/fetchContentType";
 
-//call-to-action-sections
 interface CallToActionSectionProps {
   locale: string;
 }
@@ -28,7 +27,7 @@ export const CallToActionSection = async ({
             </p>
           </div>
           <div className="w-full max-w-sm space-y-2">
-            <form className="flex space-x-2">
+            <form className="flex space-x-4">
               <Input
                 className="max-w-lg flex-1"
                 placeholder={
