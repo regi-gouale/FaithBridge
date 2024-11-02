@@ -19,14 +19,14 @@ export const CallToActionSection = async ({
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-4">
-            <h2 className="mb-4 font-heading text-3xl font-semibold tracking-tighter sm:text-4xl md:text-5xl">
+            <h2 className="mb-4 font-heading text-3xl font-semibold tracking-tighter sm:mb-6 sm:text-4xl md:mb-8 md:text-5xl lg:mb-12">
               {callToActionsSectionContent.title as string}
             </h2>
             <p className="mx-auto mb-4 max-w-2xl text-muted-foreground md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
               {callToActionsSectionContent.description as string}
             </p>
           </div>
-          <div className="w-full max-w-sm space-y-2">
+          <div className="w-full max-w-sm space-y-2 pt-4 sm:pt-6 md:pt-8 lg:pt-12">
             <form className="flex space-x-4">
               <Input
                 className="max-w-lg flex-1"
