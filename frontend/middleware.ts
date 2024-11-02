@@ -17,7 +17,7 @@ function getLocale(request: NextRequest): string | undefined {
   return matchLocale(languages, locales, i18n.defaultLocale);
 }
 
-export async function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const locale = getLocale(request) || i18n.defaultLocale;
   const pathname = request.nextUrl.pathname;
   const localeProtectedRoutes = protectedRoutes.map(
@@ -38,16 +38,10 @@ export async function middleware(request: NextRequest) {
   }
   const session = await auth();
 
-  // Ajoutez cette vérification pour les routes protégées
   if (localeProtectedRoutes.includes(pathname) && !session?.user) {
     return NextResponse.redirect(new URL(`/${locale}/sign-in`, request.url));
-  } else if (localeProtectedRoutes.includes(pathname) && session?.user) {
-    return NextResponse.redirect(new URL(`${pathname}`, request.url));
-  } else if (pathname === `/${locale}/sign-in` && session?.user) {
-    return NextResponse.redirect(new URL(`/${locale}/dashboard`, request.url));
   }
 
-  // Ajoutez cette ligne pour éviter de continuer l'exécution après la redirection
   return NextResponse.next();
 }
 

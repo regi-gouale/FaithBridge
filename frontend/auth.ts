@@ -4,6 +4,7 @@ import ForwardEmail from "next-auth/providers/forwardemail";
 import Google from "next-auth/providers/google";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
+import { UserRole } from "@prisma/client";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -16,6 +17,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: profile.email,
           image: profile.picture as string | null | undefined,
           emailVerified: profile.email_verified,
+          role: profile.role ?? UserRole.MEMBER,
         };
       },
     }),
@@ -27,6 +29,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           email: profile.email,
           image: profile.picture as string | null | undefined,
           emailVerified: profile.email_verified,
+          role: profile.role ?? UserRole.MEMBER,
         };
       },
     }),
@@ -36,13 +39,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   session: {
-    strategy: "database",
+    strategy: "jwt",
   },
   callbacks: {
-    async session({ session, user }) {
-      if (!session?.user) return session;
-      session.user.id = user.id;
-      if ("role" in user) session.user.role = user.role;
+    jwt({ token, user }) {
+      if (user) token.role = user.role;
+      return token;
+    },
+    session({ session, token }) {
+      session.user.role = token.role;
       return session;
     },
   },
