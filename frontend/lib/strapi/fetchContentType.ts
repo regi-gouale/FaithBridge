@@ -1,6 +1,6 @@
 export interface StrapiData {
   id: number;
-  [key: string]: string | number | boolean;
+  [key: string]: string | number | boolean | StrapiData | StrapiData[];
 }
 
 interface StrapiResponse {
@@ -21,7 +21,7 @@ export function spreadStrapiData(
 
 export default async function fetchContentType(
   contentType: string,
-  params: string
+  params?: string
 ): Promise<StrapiData | StrapiData[] | null | undefined> {
   try {
     const url = new URL(
@@ -29,10 +29,13 @@ export default async function fetchContentType(
       process.env.NEXT_PUBLIC_STRAPI_API_URL
     );
 
-    const response = await fetch(`${url.href}?${params}`, {
-      method: "GET",
-      cache: "no-store",
-    });
+    const response = await fetch(
+      `${url.href}?populate=*${params ? `&${params}` : ""}`,
+      {
+        method: "GET",
+        cache: "no-store",
+      }
+    );
 
     if (!response.ok) {
       throw new Error(
@@ -47,4 +50,30 @@ export default async function fetchContentType(
   } catch (error) {
     console.error("FetchContentTypeError", error);
   }
+}
+
+export async function fetchLocales(): Promise<string[]> {
+  const url = new URL(
+    "api/i18n/locales",
+    process.env.NEXT_PUBLIC_STRAPI_API_URL
+  );
+
+  const response = await fetch(url.href, {
+    method: "GET",
+    cache: "no-store",
+  });
+
+  if (response.ok) {
+    const locales = await response.json();
+    return locales.map((locale: StrapiData) => locale.name as string);
+  }
+  return [];
+}
+
+export function fetchImageUrl(imageName: string): string {
+  const url = new URL(
+    `uploads/${imageName}`,
+    process.env.NEXT_PUBLIC_STRAPI_API_URL
+  );
+  return url.href;
 }

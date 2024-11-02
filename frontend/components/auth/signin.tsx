@@ -28,7 +28,7 @@ export default function SignIn({ data }: SignInDataProps) {
         <CardHeader>
           <div className="mb-4 flex justify-center">
             <Image
-              src="http://localhost:1337/uploads/logo_dbbf5809ff.svg"
+              src={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}/uploads/logo_dbbf5809ff.svg`}
               alt="Company Logo"
               width={240}
               height={240}
