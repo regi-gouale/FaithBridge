@@ -6,6 +6,11 @@ interface LayoutProps {
 
 export default async function Layout({ children }: LayoutProps) {
   return (
-    <main className="flex size-full flex-col bg-background">{children}</main>
+    <main
+      className="flex size-full flex-col bg-background"
+      suppressHydrationWarning
+    >
+      {children}
+    </main>
   );
 }

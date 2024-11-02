@@ -29,15 +29,15 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params,
 }: Readonly<{
   children: ReactNode;
-  params: { locale: Locale };
+  params: Promise<{ locale: Locale }>;
 }>) {
   return (
-    <html lang={params.locale} suppressHydrationWarning>
+    <html lang={(await params).locale} suppressHydrationWarning>
       <body
         className={cn(
           `${headingFont.variable} ${bodyFont.variable} antialiased`,
@@ -60,7 +60,7 @@ export default function RootLayout({
   );
 }
 
-export function SuspenseFallback() {
+function SuspenseFallback() {
   return (
     <div className="flex h-screen w-full items-center justify-center">
       <div className="flex flex-col items-center space-y-4">
