@@ -36,10 +36,10 @@ export default function SignIn({ data }: SignInDataProps) {
             />
           </div>
           <CardTitle className="text-center font-heading text-2xl">
-            {data.cardTitle}
+            {data.cardTitle as string}
           </CardTitle>
           <CardDescription className="text-center font-body text-base">
-            {data.cardDescription}
+            {data.cardDescription as string}
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
@@ -61,7 +61,7 @@ export default function SignIn({ data }: SignInDataProps) {
               className="w-full font-heading font-semibold"
               size="lg"
             >
-              {data.magicLinkText}
+              {data.magicLinkText as string}
             </Button>
           </form>
           <div className="relative">
@@ -70,7 +70,7 @@ export default function SignIn({ data }: SignInDataProps) {
             </div>
             <div className="relative flex justify-center text-xs uppercase">
               <span className="bg-background px-2 text-muted-foreground">
-                {data.orContinueText}
+                {data.orContinueText as string}
               </span>
             </div>
           </div>
@@ -101,9 +101,9 @@ export default function SignIn({ data }: SignInDataProps) {
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-sm text-muted-foreground">
-            {data.dontHaveAccountText}{" "}
+            {data.dontHaveAccountText as string}{" "}
             <Link href="/sign-up" className="text-primary hover:underline">
-              {data.signUpText}
+              {data.signUpText as string}
             </Link>
           </p>
         </CardFooter>
