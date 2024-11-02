@@ -369,6 +369,68 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiCallToActionSectionCallToActionSection
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'call_to_action_sections';
+  info: {
+    displayName: 'CallToActionSection';
+    pluralName: 'call-to-action-sections';
+    singularName: 'call-to-action-section';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    getStartedButton: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    inputPlaceholder: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    locale: Schema.Attribute.String;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::call-to-action-section.call-to-action-section'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    subDescription: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    title: Schema.Attribute.String &
+      Schema.Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiFeatureSectionFeatureSection
   extends Struct.CollectionTypeSchema {
   collectionName: 'feature_sections';
@@ -1113,6 +1175,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::call-to-action-section.call-to-action-section': ApiCallToActionSectionCallToActionSection;
       'api::feature-section.feature-section': ApiFeatureSectionFeatureSection;
       'api::header.header': ApiHeaderHeader;
       'api::hero-section.hero-section': ApiHeroSectionHeroSection;

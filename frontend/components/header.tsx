@@ -23,32 +23,32 @@ export const Header = async ({ locale }: HeaderProps) => {
           priority
           className="mr-2"
         />
-        <span className="font-bold">{headerContent.appName}</span>
+        <span className="font-bold">{headerContent.appName as string}</span>
       </Link>
       <nav className="ml-auto flex gap-4 font-heading font-medium sm:gap-6">
         <Link
           className="text-sm font-medium underline-offset-4 hover:underline"
           href="#"
         >
-          {headerContent.features}
+          {headerContent.features as string}
         </Link>
         <Link
           className="text-sm font-medium underline-offset-4 hover:underline"
           href="#"
         >
-          {headerContent.pricing}
+          {headerContent.pricing as string}
         </Link>
         <Link
           className="text-sm font-medium underline-offset-4 hover:underline"
           href="#"
         >
-          {headerContent.about}
+          {headerContent.about as string}
         </Link>
         <Link
           className="text-sm font-medium underline-offset-4 hover:underline"
           href="#"
         >
-          {headerContent.contact}
+          {headerContent.contact as string}
         </Link>
       </nav>
     </header>
