@@ -8,14 +8,42 @@ import { prisma } from "@/lib/prisma";
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GitHub,
+    Google({
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture as string | null | undefined,
+          emailVerified: profile.email_verified,
+        };
+      },
+    }),
+    GitHub({
+      profile(profile) {
+        return {
+          id: profile.id.toString(),
+          name: profile.name,
+          email: profile.email,
+          image: profile.picture as string | null | undefined,
+          emailVerified: profile.email_verified,
+        };
+      },
+    }),
     ForwardEmail({
       apiKey: process.env.AUTH_FORWARDEMAIL_KEY,
       from: process.env.EMAIL_FROM,
     }),
-    Google
   ],
   session: {
-    strategy: "jwt",
+    strategy: "database",
+  },
+  callbacks: {
+    async session({ session, user }) {
+      if (!session?.user) return session;
+      session.user.id = user.id;
+      if ("role" in user) session.user.role = user.role;
+      return session;
+    },
   },
 });
