@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Lato } from "next/font/google";
+import { Merriweather, Nunito } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { Locale, i18n } from "@/i18n-config";
@@ -7,14 +7,14 @@ import { ReactNode, Suspense } from "react";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { TailwindIndicator } from "@/components/theme/tailwind-indicator";
 
-const headingFont = Poppins({
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+const headingFont = Nunito({
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
   variable: "--font-heading",
   subsets: ["latin"],
 });
 
-const bodyFont = Lato({
-  weight: ["100", "300", "400", "700", "900"],
+const bodyFont = Merriweather({
+  weight: ["300", "400", "700", "900"],
   variable: "--font-body",
   subsets: ["latin"],
 });
