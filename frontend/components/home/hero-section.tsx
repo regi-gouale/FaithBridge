@@ -1,6 +1,7 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
 import fetchContentType, { StrapiData } from "@/lib/strapi/fetchContentType";
+import Link from "next/link";
 
 interface HeroSectionProps {
   locale: string;
@@ -24,8 +25,12 @@ export const HeroSection = async ({ locale }: HeroSectionProps) => {
               {heroSectionContent.description as string}
             </p>
           </div>
-          <div className="space-x-4 pt-4 sm:pt-6 md:pt-8 lg:pt-12">
-            <Button>{heroSectionContent.getStartedButton as string}</Button>
+          <div className="flex space-x-4 pt-4 sm:pt-6 md:pt-8 lg:pt-12">
+            <Button asChild>
+              <Link href="/dashboard">
+                {heroSectionContent.getStartedButton as string}
+              </Link>
+            </Button>
             <Button variant="outline">
               {heroSectionContent.learnMoreButton as string}
             </Button>
