@@ -6,6 +6,7 @@ import { Locale, i18n } from "@/i18n-config";
 import { ReactNode, Suspense } from "react";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { TailwindIndicator } from "@/components/theme/tailwind-indicator";
+import { Toaster } from "@/components/ui/toaster";
 
 const headingFont = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -54,6 +55,7 @@ export default async function RootLayout({
           >
             {children}
             <TailwindIndicator />
+            <Toaster />
           </ThemeProvider>
         </Suspense>
       </body>
