@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <footer className="sticky bottom-0 mx-auto flex w-full items-center justify-center border-t bg-neutral-50 p-4 text-center font-body text-sm text-muted-foreground">
+    <footer className="sticky bottom-0 mx-auto flex w-full items-center justify-center border-t bg-background/75 p-4 text-center font-body text-sm text-muted-foreground">
       <p>
         &copy; 2024 FaithBridge. All rights reserved. |{" "}
         <a href="#" className="text-blue-600 hover:underline">

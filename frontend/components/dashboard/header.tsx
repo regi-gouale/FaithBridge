@@ -1,7 +1,9 @@
 import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { Bell, LogOut, Search, Settings, User } from "lucide-react";
-import { Input } from "@/components/ui/input";
+import { Bell, LogOut, 
+  // Search, 
+  Settings, User } from "lucide-react";
+// import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -16,8 +18,8 @@ import React from "react";
 
 const SearchBar: React.FC = () => (
   <div className="flex items-center">
-    <Search className="mr-2 size-4 text-muted-foreground" />
-    <Input type="search" placeholder="Search..." className="w-64" />
+    {/* <Search className="mr-2 size-4 text-muted-foreground" />
+    <Input type="search" placeholder="Search..." className="w-64" /> */}
   </div>
 );
 

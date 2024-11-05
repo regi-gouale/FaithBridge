@@ -36,8 +36,9 @@ export default async function RootLayout({
   children: ReactNode;
   params: Promise<{ locale: Locale }>;
 }>) {
+  const lang = await params
   return (
-    <html lang={(await params).locale} suppressHydrationWarning>
+    <html lang={lang.locale} suppressHydrationWarning>
       <body
         className={cn(
           `${headingFont.variable} ${bodyFont.variable} antialiased`,
