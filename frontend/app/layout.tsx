@@ -6,6 +6,7 @@ import { Locale, i18n } from "@/i18n-config";
 import { ReactNode, Suspense } from "react";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import { TailwindIndicator } from "@/components/theme/tailwind-indicator";
+import { Toaster } from "@/components/ui/toaster";
 
 const headingFont = Nunito({
   weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
@@ -36,8 +37,9 @@ export default async function RootLayout({
   children: ReactNode;
   params: Promise<{ locale: Locale }>;
 }>) {
+  const lang = await params
   return (
-    <html lang={(await params).locale} suppressHydrationWarning>
+    <html lang={lang.locale} suppressHydrationWarning>
       <body
         className={cn(
           `${headingFont.variable} ${bodyFont.variable} antialiased`,
@@ -53,6 +55,7 @@ export default async function RootLayout({
           >
             {children}
             <TailwindIndicator />
+            <Toaster />
           </ThemeProvider>
         </Suspense>
       </body>

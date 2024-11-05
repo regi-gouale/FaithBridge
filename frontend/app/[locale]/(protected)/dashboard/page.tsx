@@ -116,8 +116,8 @@ export default function DashboardPage() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="flex h-[200px] w-full items-center justify-center bg-gray-100">
-            <p className="text-gray-500">
+          <div className="flex h-[400px] w-full items-center justify-center rounded-lg bg-neutral-100 dark:bg-neutral-700">
+            <p className="">
               Placeholder for Spiritual Growth Chart
             </p>
           </div>

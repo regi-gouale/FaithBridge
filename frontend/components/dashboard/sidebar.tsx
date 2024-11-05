@@ -23,7 +23,7 @@ export const DashboardSidebar = ({
   ...props
 }: ComponentProps<typeof Sidebar>) => {
   return (
-    <Sidebar className="border-r-0" {...props}>
+    <Sidebar className="border-r-0 bg-background" {...props}>
       <SidebarHeader>
         <TeamSwitcher teams={teams} />
         <NavMain items={navMain} />
