@@ -2,7 +2,7 @@
 
 ### Next.js Authentication with Server Actions
 
-This project demonstrates a robust authentication system built with Next.js, leveraging server actions for secure and efficient user management.
+This SaaS project allows pastors of Christian communities to receive reports of spiritual monitoring interviews carried out by those responsible. It demonstrates a robust authentication system built with Next.js, leveraging server actions for secure and efficient user management.
 
 ## Key Features
 
@@ -13,6 +13,9 @@ This project demonstrates a robust authentication system built with Next.js, lev
 - **Role-Based Access Control**: Support for different user roles and permissions to control access to various parts of the application.
 - **Password Recovery**: Functionality for users to reset their passwords securely via email verification.
 - **Token-Based Authentication**: Use of JWT (JSON Web Tokens) for stateless authentication and easy integration with other services.
+- **Spiritual Monitoring Reports**: Allows pastors to receive and review reports of spiritual monitoring interviews.
+- **Interview Scheduling**: Facilitates the scheduling of spiritual monitoring interviews between pastors and community members.
+- **Notification System**: Sends notifications to users for upcoming interviews and report submissions.
 
 ## Getting Started
 
