@@ -22,14 +22,14 @@ export const navMain = [
     icon: HomeIcon,
   },
   {
-    title: { en: "Interviews", fr: "Entretiens" },
-    url: "/interviews",
-    icon: Calendar,
-  },
-  {
     title: { en: "Members", fr: "Membres" },
     url: "/members",
     icon: UsersIcon,
+  },
+  {
+    title: { en: "Interviews", fr: "Entretiens" },
+    url: "/interviews",
+    icon: Calendar,
   },
   {
     title: { en: "Settings", fr: "Paramètres" },

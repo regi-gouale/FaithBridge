@@ -1,14 +1,33 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import {
+  ChevronLeftIcon,
+  ChevronRightIcon,
+  DoubleArrowLeftIcon,
+  DoubleArrowRightIcon,
+} from "@radix-ui/react-icons";
+import {
+  ColumnDef,
+  ColumnFiltersState,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  SortingState,
+  useReactTable,
+} from "@tanstack/react-table";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "../ui/select";
 import {
   Table,
   TableBody,
@@ -16,36 +35,23 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import {
-  DoubleArrowLeftIcon,
-  DoubleArrowRightIcon,
-} from "@radix-ui/react-icons";
-import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
-import { useState } from "react";
+} from "../ui/table";
+// import { Member } from "./members-table-columns";
+import { Member } from "@prisma/client";
 
-interface DataTableProps<TData, TValue> {
+interface MembersTableProps<TData extends Member, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
 }
 
-export function DataTable<TData, TValue>({
+export function MembersTable<TData extends Member, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+}: MembersTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+  const router = useRouter();
+
   const table = useReactTable({
     data,
     columns,
@@ -62,17 +68,17 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div>
+    <>
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter Members"
+          placeholder="Search"
           value={
-            (table.getColumn("memberName")?.getFilterValue() as string) ?? ""
+            (table.getColumn("lastName")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("memberName")?.setFilterValue(event.target.value)
+            table.getColumn("lastName")?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-xl"
         />
       </div>
       <div className="rounded-xl border">
@@ -101,7 +107,9 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  onClick={() => console.log(row)}
+                  onClick={() => {
+                    router.push(`/members/${row.original.id}`);
+                  }}
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell key={cell.id}>
@@ -192,6 +200,6 @@ export function DataTable<TData, TValue>({
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

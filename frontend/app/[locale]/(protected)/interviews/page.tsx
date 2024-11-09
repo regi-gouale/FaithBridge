@@ -1,8 +1,5 @@
-import {
-  interviewColumns,
-  InterviewReport,
-} from "@/components/interviews/columns";
-import { DataTable } from "@/components/interviews/data-table";
+import { InterviewReport } from "@/components/interviews/columns";
+import { InterviewsComponent } from "@/components/interviews/interviews-component";
 
 // Mock data for interview reports
 const interviewReports: InterviewReport[] = [
@@ -197,8 +194,7 @@ export default async function InterviewsPage() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <h1 className="mb-6 font-heading text-3xl font-bold">Interviews</h1>
-      <DataTable columns={interviewColumns} data={data} />
+      <InterviewsComponent data={data} />
     </main>
   );
 }

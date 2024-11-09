@@ -1,9 +1,8 @@
-import { SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
-import { Bell, LogOut, 
-  // Search, 
-  Settings, User } from "lucide-react";
+import { SidebarTrigger } from "@/components/ui/sidebar";
+import { Bell, LogOut, SettingsIcon, User } from "lucide-react";
 // import { Input } from "@/components/ui/input";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -13,7 +12,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import React from "react";
 
 const SearchBar: React.FC = () => (
@@ -53,7 +51,7 @@ const UserMenu: React.FC = () => (
         <span>Profile</span>
       </DropdownMenuItem>
       <DropdownMenuItem>
-        <Settings className="mr-2 size-4" />
+        <SettingsIcon className="mr-2 size-4" />
         <span>Settings</span>
       </DropdownMenuItem>
       <DropdownMenuSeparator />
