@@ -25,6 +25,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Gender } from "@prisma/client";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
@@ -34,7 +35,7 @@ import { z } from "zod";
 const createMemberFormSchema = z.object({
   firstname: z.string().min(1, "Le nom est obligatoire"),
   lastname: z.string().min(1, "Le prénom est obligatoire"),
-  gender: z.enum(["MALE", "FEMALE"]),
+  gender: z.nativeEnum(Gender),
   email: z.string().email(),
   dateOfBirth: z
     .date()
@@ -118,8 +119,8 @@ export const CreateMemberForm = () => {
                   </FormControl>
                   <SelectContent>
                     <SelectGroup>
-                      <SelectItem value="MALE">Homme</SelectItem>
-                      <SelectItem value="FEMALE">Femme</SelectItem>
+                      <SelectItem value={Gender.MALE}>Homme</SelectItem>
+                      <SelectItem value={Gender.FEMALE}>Femme</SelectItem>
                     </SelectGroup>
                   </SelectContent>
                 </Select>

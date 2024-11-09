@@ -6,6 +6,7 @@ import { useIsMobile } from "@/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { Member } from "@prisma/client";
 import { format } from "date-fns";
+import { fr } from "date-fns/locale";
 import { ArrowLeftIcon, PlusIcon, Settings } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -85,7 +86,7 @@ export default function MemberIdPage(props: { params: MemberIdPageProps }) {
             <span className="font-semibold">Date de naissance :</span>
             <span className="ml-auto">
               {data?.dateOfBirth
-                ? format(data.dateOfBirth, "dd/MM/yyyy")
+                ? format(data.dateOfBirth, "PPP", { locale: fr })
                 : "N/A"}
             </span>
           </div>

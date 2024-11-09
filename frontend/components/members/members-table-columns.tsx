@@ -7,16 +7,6 @@ import { formatDistanceToNowStrict } from "date-fns";
 import { fr } from "date-fns/locale";
 import { ArrowUpDownIcon } from "lucide-react";
 
-// export type Member = {
-//   id: string;
-//   firstname: string;
-//   lastname: string;
-//   email: string;
-//   gender: "MALE" | "FEMALE";
-//   dateOfBirth: Date;
-//   phoneNumber: string;
-// };
-
 export const membersTableColumns: ColumnDef<Member>[] = [
   {
     accessorKey: "firstName",
@@ -81,7 +71,6 @@ export const membersTableColumns: ColumnDef<Member>[] = [
       const age = formatDistanceToNowStrict(member.dateOfBirth, {
         locale: fr,
       });
-      // const age = 20;
 
       return <div className="mr-4 text-right font-body">{age} </div>;
     },
