@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 import { Member } from "@prisma/client";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
-import { ArrowLeftIcon, PlusIcon, Settings } from "lucide-react";
+import { ArrowLeftIcon, PencilIcon, PlusIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -45,12 +45,12 @@ export default function MemberIdPage(props: { params: MemberIdPageProps }) {
         >
           <ArrowLeftIcon className="size-8" />
         </Button>
-        <h1 className="font-heading text-3xl font-semibold">
+        <h1 className="font-heading text-xl font-semibold sm:text-2xl lg:text-3xl">
           {data?.firstName} {data?.lastName}
         </h1>
         <Button
           className="flex items-center rounded-full"
-          variant={"outline"}
+          variant={"secondary"}
           size={isMobile ? "icon" : "lg"}
         >
           <PlusIcon className="size-10" />
@@ -68,22 +68,34 @@ export default function MemberIdPage(props: { params: MemberIdPageProps }) {
         <CardHeader className="font-heading text-xl font-semibold capitalize">
           <div className="flex items-center justify-between">
             <CardTitle>Informations</CardTitle>
-            <Button variant={"ghost"}>
-              <Settings className="size-8 text-primary" />
+            <Button
+              variant={"secondary"}
+              size={isMobile ? "icon" : "default"}
+              className="rounded-full"
+            >
+              <PencilIcon className="size-8" />
+              <span
+                className={cn(
+                  isMobile ? "hidden" : "flex",
+                  "ml-2 font-heading font-semibold"
+                )}
+              >
+                Modifier
+              </span>
             </Button>
           </div>
         </CardHeader>
         <CardContent className="grid gap-2">
           <div className="flex items-center justify-evenly">
-            <span className="font-semibold">Nom :</span>
+            <span className="font-medium">Nom :</span>
             <span className="ml-auto">{data?.lastName}</span>
           </div>
           <div className="flex items-center justify-evenly">
-            <span className="font-semibold">Prénom :</span>
+            <span className="font-medium">Prénom :</span>
             <span className="ml-auto">{data?.firstName}</span>
           </div>
           <div className="flex items-center justify-evenly">
-            <span className="font-semibold">Date de naissance :</span>
+            <span className="font-medium">Date de naissance :</span>
             <span className="ml-auto">
               {data?.dateOfBirth
                 ? format(data.dateOfBirth, "PPP", { locale: fr })
@@ -91,11 +103,11 @@ export default function MemberIdPage(props: { params: MemberIdPageProps }) {
             </span>
           </div>
           <div className="flex items-center justify-evenly">
-            <span className="font-semibold">E-Mail :</span>
+            <span className="font-medium">E-Mail :</span>
             <span className="ml-auto">{data?.email}</span>
           </div>
           <div className="flex items-center justify-evenly">
-            <span className="font-semibold">Téléphone :</span>
+            <span className="font-medium">Téléphone :</span>
             <span className="ml-auto">{data?.phone}</span>
           </div>
         </CardContent>

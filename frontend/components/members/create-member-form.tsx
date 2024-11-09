@@ -22,10 +22,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Gender } from "@prisma/client";
+import { Gender, Member } from "@prisma/client";
 import { format } from "date-fns";
 import { fr } from "date-fns/locale";
 import { CalendarIcon } from "lucide-react";
@@ -44,27 +43,46 @@ const createMemberFormSchema = z.object({
 });
 
 export const CreateMemberForm = () => {
-  // const [date, setDate] = useState<Date | null>(null);
-  const { toast } = useToast();
+  const defaultFormValues = {
+    firstname: "",
+    lastname: "",
+    gender: Gender.MALE,
+    email: "",
+    phoneNumber: "",
+    dateOfBirth: new Date("01/01/1990"),
+  };
   const form = useForm<z.infer<typeof createMemberFormSchema>>({
     resolver: zodResolver(createMemberFormSchema),
-    defaultValues: {
-      firstname: "",
-      lastname: "",
-      gender: "MALE",
-      email: "",
-      phoneNumber: "",
-      dateOfBirth: new Date("01/01/1990"),
-    },
+    defaultValues: defaultFormValues,
   });
 
-  function onSubmit(data: z.infer<typeof createMemberFormSchema>) {
-    // Vérifier que le membre n'existe pas dans la base de données avec Prisma. S'il existe dasn la base de données, envoyer un toast avec un message d'erreur. S'il n'existe pas le créer dasn la base de données puis faire un toast informatif
-    toast({
-      title: "Membre créé",
-      description: "Le nouveau membre a été ajouté.",
+  const createMember = async (member: Member) => {
+    const response = await fetch("/api/members", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(member),
     });
-    console.log(data);
+    if (!response.ok) {
+      console.error("Failed to create member");
+      return;
+    }
+  };
+
+  function onSubmit(data: z.infer<typeof createMemberFormSchema>) {
+    const memberData: Member = {
+      id: "",
+      firstName: data.firstname,
+      lastName: data.lastname,
+      gender: data.gender,
+      email: data.email,
+      dateOfBirth: data.dateOfBirth,
+      phone: data.phoneNumber,
+    };
+    createMember(memberData);
+
+    form.reset(defaultFormValues);
   }
 
   return (

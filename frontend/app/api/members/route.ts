@@ -1,4 +1,5 @@
 import { prisma } from "@/lib/prisma";
+import { Member } from "@prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(req: NextRequest) {
@@ -38,6 +39,49 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(
       { error: `Failed to fetch members.` },
       { status: 500 }
+    );
+  }
+}
+
+export async function POST(req: NextRequest) {
+  if (!process.env.DATABASE_URL) {
+    return NextResponse.json(
+      { error: "DATABASE_URL is not set" },
+      { status: 500 }
+    );
+  }
+  try {
+    const body = (await req.json()) as Member;
+    const { firstName, lastName, email, gender, dateOfBirth, phone } = body;
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !gender ||
+      !dateOfBirth ||
+      !phone
+    ) {
+      return NextResponse.json(
+        { error: `Missing required fields.` },
+        { status: 400 }
+      );
+    }
+    const member = await prisma.member.create({
+      data: {
+        firstName,
+        lastName,
+        email,
+        gender,
+        dateOfBirth,
+        phone,
+      },
+    });
+    console.log(body);
+    return NextResponse.json({ member }, { status: 201 });
+  } catch {
+    return NextResponse.json(
+      { error: `Failed to create member.` },
+      { status: 400 }
     );
   }
 }
