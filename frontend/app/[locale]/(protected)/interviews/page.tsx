@@ -1,10 +1,5 @@
-import {
-  interviewColumns,
-  InterviewReport,
-} from "@/components/interviews/columns";
-import { DataTable } from "@/components/interviews/data-table";
-import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
+import { InterviewReport } from "@/components/interviews/columns";
+import { InterviewsComponent } from "@/components/interviews/interviews-component";
 
 // Mock data for interview reports
 const interviewReports: InterviewReport[] = [
@@ -199,14 +194,7 @@ export default async function InterviewsPage() {
 
   return (
     <main className="container mx-auto px-4 py-8">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="font-heading text-3xl font-bold">Interviews</h1>
-        <Button className="flex rounded-full font-heading font-semibold">
-          <PlusIcon className="size-8" />
-          <span className="ml-2 hidden md:flex">New Interview Report</span>
-        </Button>
-      </div>
-      <DataTable columns={interviewColumns} data={data} />
+      <InterviewsComponent data={data} />
     </main>
   );
 }

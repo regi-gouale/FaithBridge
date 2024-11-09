@@ -17,12 +17,14 @@ This project demonstrates a robust authentication system built with Next.js, lev
 ## Getting Started
 
 ### Prerequisites
+
 - Node.js
-- npm or yarn
+- npm or pnpm
 
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/regi-gouale/FaithBridge.git
    cd FaithBridge
@@ -32,16 +34,17 @@ This project demonstrates a robust authentication system built with Next.js, lev
    ```bash
    npm install
    # or
-   yarn install
+   pnpm install
    ```
 
 ### Running the Development Server
 
 Start the development server:
+
 ```bash
 npm run dev
 # or
-yarn dev
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -49,6 +52,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
+
 - [Next.js Documentation](https://nextjs.org/docs) - Learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - Interactive Next.js tutorial.
 
