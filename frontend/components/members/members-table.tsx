@@ -1,6 +1,5 @@
 "use client";
 
-import { useToast } from "@/hooks/use-toast";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
@@ -51,7 +50,6 @@ export function MembersTable<TData extends Member, TValue>({
 }: MembersTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
-  const { toast } = useToast();
   const router = useRouter();
 
   const table = useReactTable({
@@ -110,12 +108,7 @@ export function MembersTable<TData extends Member, TValue>({
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
                   onClick={() => {
-                    toast({
-                      title: "Member clicked",
-                      description: `Member ${row.original.firstName} clicked`,
-                    });
                     router.push(`/members/${row.original.id}`);
-                    console.log(row);
                   }}
                 >
                   {row.getVisibleCells().map((cell) => (

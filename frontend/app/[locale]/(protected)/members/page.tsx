@@ -8,6 +8,9 @@ export default function MembersPage() {
 
   const fetchData = async () => {
     const response = await fetch("/api/members");
+    if (!response.ok) {
+      return [];
+    }
     const { members } = await response.json();
     setData(members);
   };
