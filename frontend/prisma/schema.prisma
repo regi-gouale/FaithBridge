@@ -47,6 +47,11 @@ enum UserRole {
   ADMIN
 }
 
+enum Gender {
+  MALE
+  FEMALE
+}
+
 model User {
   id            String    @id @default(cuid())
   name          String?
@@ -58,6 +63,16 @@ model User {
   sessions      Session[]
 
   @@map("users")
+}
+
+model Member {
+  id          String   @id @default(cuid())
+  firstName   String   @map("first_name")
+  lastName    String   @map("last_name")
+  email       String   @unique
+  gender      Gender
+  dateOfBirth DateTime @map("date_of_birth")
+  phone       String
 }
 
 model VerificationToken {
