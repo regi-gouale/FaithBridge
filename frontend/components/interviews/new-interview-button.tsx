@@ -15,14 +15,13 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { PlusIcon } from "lucide-react";
-import { useMedia } from "react-use";
 import { CreateInterviewReportForm } from "./create-interview-report-form";
 
 export const NewInterviewButton = () => {
-  const isDesktop = useMedia("(min-width: 1024px)", true);
-  console.log(isDesktop);
-  if (isDesktop) {
+  const isMobile = useIsMobile();
+  if (!isMobile) {
     return (
       <Dialog>
         <DialogTrigger asChild>

@@ -1,24 +1,25 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Member } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { formatDistanceToNowStrict } from "date-fns";
 import { fr } from "date-fns/locale";
 import { ArrowUpDownIcon } from "lucide-react";
 
-export type Member = {
-  id: string;
-  firstname: string;
-  lastname: string;
-  email: string;
-  gender: "MALE" | "FEMALE";
-  dateOfBirth: Date;
-  phoneNumber: string;
-};
+// export type Member = {
+//   id: string;
+//   firstname: string;
+//   lastname: string;
+//   email: string;
+//   gender: "MALE" | "FEMALE";
+//   dateOfBirth: Date;
+//   phoneNumber: string;
+// };
 
 export const membersTableColumns: ColumnDef<Member>[] = [
   {
-    accessorKey: "firstname",
+    accessorKey: "firstName",
     header: ({ column }) => {
       return (
         <Button
@@ -26,7 +27,7 @@ export const membersTableColumns: ColumnDef<Member>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() == "asc")}
           className="font-heading font-semibold"
         >
-          First Name
+          Prénom
           <ArrowUpDownIcon className="ml-2 size-4" />
         </Button>
       );
@@ -36,7 +37,7 @@ export const membersTableColumns: ColumnDef<Member>[] = [
     ),
   },
   {
-    accessorKey: "lastname",
+    accessorKey: "lastName",
     header: ({ column }) => {
       return (
         <Button
@@ -44,7 +45,7 @@ export const membersTableColumns: ColumnDef<Member>[] = [
           onClick={() => column.toggleSorting(column.getIsSorted() == "asc")}
           className="font-heading font-semibold"
         >
-          Last Name
+          Nom
           <ArrowUpDownIcon className="ml-2 size-4" />
         </Button>
       );

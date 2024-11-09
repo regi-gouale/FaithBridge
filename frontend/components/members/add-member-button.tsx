@@ -1,5 +1,6 @@
 "use client";
 
+import { CreateMemberForm } from "@/components/members/create-member-form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -17,13 +18,12 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { PlusIcon } from "lucide-react";
-import { useMedia } from "react-use";
-import { CreateMemberForm } from "./create-member-form";
 
 export const AddMemberButton = () => {
-  const isDesktop = useMedia("(min-width: 768px)", true);
-  return isDesktop ? (
+  const isMobile = useIsMobile();
+  return !isMobile ? (
     <Dialog>
       <DialogTrigger asChild>
         <Button className="flex rounded-full font-heading font-semibold">

@@ -37,7 +37,8 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { Member } from "./members-table-columns";
+// import { Member } from "./members-table-columns";
+import { Member } from "@prisma/client";
 
 interface MembersTableProps<TData extends Member, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -74,10 +75,10 @@ export function MembersTable<TData extends Member, TValue>({
         <Input
           placeholder="Search"
           value={
-            (table.getColumn("lastname")?.getFilterValue() as string) ?? ""
+            (table.getColumn("lastName")?.getFilterValue() as string) ?? ""
           }
           onChange={(event) =>
-            table.getColumn("lastname")?.setFilterValue(event.target.value)
+            table.getColumn("lastName")?.setFilterValue(event.target.value)
           }
           className="max-w-xl"
         />
@@ -111,7 +112,7 @@ export function MembersTable<TData extends Member, TValue>({
                   onClick={() => {
                     toast({
                       title: "Member clicked",
-                      description: `Member ${row.original.firstname} clicked`,
+                      description: `Member ${row.original.firstName} clicked`,
                     });
                     router.push(`/members/${row.original.id}`);
                     console.log(row);

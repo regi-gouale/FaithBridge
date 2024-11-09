@@ -1,6 +1,7 @@
+import { Member } from "@prisma/client";
 import { AddMemberButton } from "./add-member-button";
 import { MembersTable } from "./members-table";
-import { Member, membersTableColumns } from "./members-table-columns";
+import { membersTableColumns } from "./members-table-columns";
 
 interface MembersPageComponentProps {
   data: Member[];
